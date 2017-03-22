@@ -2,24 +2,29 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { Layout, Header, Navigation, Drawer, Content } from 'react-mdl';
+import ListItem from './ListItem.js';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      requestType: "recent",
+      requestType: "pending",
       requests: []
     };
   }
 
-  showRecent = () => {
-    this.setState({requestType: "recent clicked"});
+  showPending = () => {
+    this.setState({requestType: 'pending'});
   }
 
   componentDidMount() {
-    fetch('http://localhost:3000/requests').then((response) => {
-      this.setState({requests: response.data});
-    });
+    fetch('http://localhost:3000/requests')
+      .then((response) => {
+        return response.json();
+      })
+      .then((json) => {
+        this.setState({requests: json.data});
+      });
   }
 
   componentWillUnmount() {
@@ -27,6 +32,10 @@ class App extends Component {
   }
 
   render() {
+    const listItems = this.state.requests.map((item) => {
+      return (<ListItem description={item.description} requestType={item.type} key={item.id} />);
+    });
+
     return (
       <div className="App">
         <div className="App-header">
@@ -38,17 +47,19 @@ class App extends Component {
           <Layout className="main-background">
               <Header transparent title="Requests" className="white">
                 <Navigation>
-                  <a href="">Recent</a>
+                  <a href="">Pending</a>
                 </Navigation>
               </Header>
               <Drawer title="Requests">
                 <Navigation>
-                  <a href="#" onClick={this.showRecent}>Recent</a>
+                  <a href="#" onClick={this.showPending}>Pending</a>
                   <a href="">Approved</a>
                   <a href="">Rejected</a>
                 </Navigation>
               </Drawer>
-              <Content />
+              <Content>
+                {listItems}
+              </Content>
           </Layout>
         </div>
       </div>
