@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { Badge, Icon } from 'react-mdl';
 
 class App extends Component {
   render() {
@@ -13,6 +14,10 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+
+        <Badge text="1" overlap>
+          <Icon name="account_box" />
+        </Badge>
       </div>
     );
   }
