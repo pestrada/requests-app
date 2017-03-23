@@ -24,3 +24,7 @@ div.mdl-card {
   height: 100px;
   background: url('http://www.getmdl.io/assets/demos/welcome_card.jpg') center / cover;
 }
+
+button.action-button {
+  margin-right: 10px;
+}
