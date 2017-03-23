@@ -17,6 +17,10 @@ class App extends Component {
     this.loadRequests({requestType: 'pending'});
   }
 
+  showApproved = () => {
+    this.loadRequests({requestType: 'approved'});
+  }
+
   loadRequests = (params) => {
     fetch(`http://localhost:3000/requests/${params.requestType}`)
       .then((response) => {
@@ -57,8 +61,8 @@ class App extends Component {
               <Drawer title="">
                 <Navigation>
                   <a href="#" onClick={this.showPending}>Pending</a>
-                  <a href="">Approved</a>
-                  <a href="">Rejected</a>
+                  <a href="#" onClick={this.showApproved}>Approved</a>
+                  <a href="#">Rejected</a>
                 </Navigation>
               </Drawer>
               <Content>
