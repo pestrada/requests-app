@@ -14,10 +14,10 @@ class App extends Component {
   }
 
   showPending = () => {
-    this.setState({requestType: 'pending'});
+    this.loadData();
   }
 
-  componentDidMount() {
+  loadData = () => {
     fetch('http://localhost:3000/requests')
       .then((response) => {
         return response.json();
@@ -25,6 +25,10 @@ class App extends Component {
       .then((json) => {
         this.setState({requests: json.data});
       });
+  }
+
+  componentDidMount() {
+    this.loadData();
   }
 
   componentWillUnmount() {
@@ -44,13 +48,13 @@ class App extends Component {
         </div>
 
         <div>
-          <Layout>
+          <Layout fixedDrawer>
               <Header title="Requests" >
                 <Navigation>
-                  <a href="">Pending</a>
+                  <a href="" onClick={this.showPending}>Pending</a>
                 </Navigation>
               </Header>
-              <Drawer title="Requests">
+              <Drawer title="">
                 <Navigation>
                   <a href="#" onClick={this.showPending}>Pending</a>
                   <a href="">Approved</a>
