@@ -14,11 +14,11 @@ class App extends Component {
   }
 
   showPending = () => {
-    this.loadData();
+    this.loadRequests({requestType: 'pending'});
   }
 
-  loadData = () => {
-    fetch('http://localhost:3000/requests')
+  loadRequests = (params) => {
+    fetch(`http://localhost:3000/requests/${params.requestType}`)
       .then((response) => {
         return response.json();
       })
@@ -28,7 +28,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.loadData();
+    this.showPending();
   }
 
   componentWillUnmount() {
