@@ -44,8 +44,8 @@ class App extends Component {
         </div>
 
         <div>
-          <Layout className="main-background">
-              <Header transparent title="Requests" className="white">
+          <Layout>
+              <Header title="Requests" >
                 <Navigation>
                   <a href="">Pending</a>
                 </Navigation>

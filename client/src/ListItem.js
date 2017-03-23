@@ -1,17 +1,9 @@
 import React, { Component } from 'react';
-import { Card, CardTitle, CardText, CardActions, Button, CardMenu, IconButton } from 'react-mdl';
+import { Card, CardTitle, CardText, CardActions, Button, CardMenu, IconButton, Badge } from 'react-mdl';
 
 class App extends Component {
   constructor(props) {
-    super(props);
-    this.state = {
-      requestType: "pending",
-      requests: []
-    };
-  }
-
-  showPending = () => {
-    this.setState({requestType: 'pending'});
+    super(props);;
   }
 
   componentDidMount() {
@@ -24,17 +16,16 @@ class App extends Component {
 
   render() {
     return (
-      <Card shadow={0} style={{width: '512px', margin: 'auto'}}>
-        <CardTitle style={{color: '#fff', height: '176px', background: 'url(http://www.getmdl.io/assets/demos/welcome_card.jpg) center / cover'}}>Welcome</CardTitle>
+      <Card shadow={0} className="card">
+        <CardTitle className="card-title"></CardTitle>
         <CardText>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            Mauris sagittis pellentesque lacus eleifend lacinia...
+          {this.props.description}
         </CardText>
         <CardActions border>
-            <Button colored>Get Started</Button>
+          <IconButton colored ripple name="add" />
         </CardActions>
-        <CardMenu style={{color: '#fff'}}>
-            <IconButton name="share" />
+        <CardMenu className="white">
+            <Badge text="4">votes</Badge>
         </CardMenu>
       </Card>
     );
