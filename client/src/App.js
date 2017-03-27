@@ -33,18 +33,19 @@ class App extends Component {
         return response.json();
       })
       .then((json) => {
-        this.setState({requests: json.data});
+        this.setState({requestType: params.requestType, requests: json.data});
       });
   }
 
   approveRequest = (id) => {
     const body = JSON.stringify({type: 'approved'});
-    fetch(`${url}/${id}`, { method: 'PATCH', body: body})
+    const headers = new Headers({'Content-Type': 'application/json',});
+    fetch(`${url}/${id}`, { method: 'PATCH', headers: headers, body: body})
       .then((response) => {
         return response.json();
       })
       .then((json) => {
-        this.setState({requests: json.data});
+        this.showPending();
       });
   }
 

@@ -31,13 +31,14 @@ router.get('/:requestType', function(req, res, next) {
 });
 
 router.patch('/:id', function(req, res, next) {
-  const data = requests.map((r) => {
-    if (r.id == req.params.id) {
-      r.type = req.body.type;
+  const len = requests.length;
+  for (let i = 0; i < len; i++) {
+    if (requests[i].id == req.params.id) {
+      requests[i].type = req.body.type;
+      break;
     }
-    return r;
-  });
-  res.json({ data: data });
+  }
+  res.json({ data: 200 });
 });
 
 module.exports = router;
