@@ -4,6 +4,8 @@ import './App.css';
 import { Layout, Header, Navigation, Drawer, Content } from 'react-mdl';
 import ListItem from './ListItem.js';
 
+const url = 'http://localhost:3000/requests';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +28,18 @@ class App extends Component {
   }
 
   loadRequests = (params) => {
-    fetch(`http://localhost:3000/requests/${params.requestType}`)
+    fetch(`${url}/${params.requestType}`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((json) => {
+        this.setState({requests: json.data});
+      });
+  }
+
+  approveRequest = (id) => {
+    const body = JSON.stringify({type: 'approved'});
+    fetch(`${url}/${id}`, { method: 'PATCH', body: body})
       .then((response) => {
         return response.json();
       })
@@ -45,7 +58,7 @@ class App extends Component {
 
   render() {
     const listItems = this.state.requests.map((item) => {
-      return (<ListItem description={item.description} requestType={item.type} key={item.id} />);
+      return (<ListItem description={item.description} requestType={item.type} key={item.id} id={item.id} approveRequest={this.approveRequest} />);
     });
 
     return (

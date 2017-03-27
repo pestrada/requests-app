@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
-import { Card, CardTitle, CardText, CardActions, CardMenu, IconButton, Badge, Button } from 'react-mdl';
+import { Card, CardTitle, CardText, CardActions, CardMenu, Badge, Button } from 'react-mdl';
 
 class App extends Component {
-  constructor(props) {
-    super(props);;
-  }
 
   componentDidMount() {
     
@@ -12,6 +9,10 @@ class App extends Component {
 
   componentWillUnmount() {
 
+  }
+
+  approveRequest = () => {
+    this.props.approveRequest(this.props.id);
   }
 
   render() {
@@ -23,9 +24,9 @@ class App extends Component {
         </CardText>
         <CardActions border>
           <div>
-            <IconButton colored ripple name="add" className="action-button" />
-            <Button raised colored className="action-button">Approve</Button>
             <Button raised colored className="action-button">Reject</Button>
+            <Button raised colored className="action-button" onClick={this.approveRequest}>Approve</Button> 
+            <Button raised colored className="action-button">Vote</Button>
           </div>
         </CardActions>
         <CardMenu className="white">
