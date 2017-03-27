@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Card, CardTitle, CardText, CardActions, CardMenu, Badge, Button } from 'react-mdl';
 
-class App extends Component {
+class ListItem extends Component {
 
   componentDidMount() {
-    
+
   }
 
   componentWillUnmount() {
@@ -24,6 +24,7 @@ class App extends Component {
   }
 
   render() {
+    const disabled = this.props.requestType !== 'pending';
     return (
       <Card shadow={0} className="card">
         <CardTitle className="card-title"></CardTitle>
@@ -32,9 +33,9 @@ class App extends Component {
         </CardText>
         <CardActions border>
           <div>
-            <Button raised colored className="action-button" onClick={this.rejectRequest}>Reject</Button>
-            <Button raised colored className="action-button" onClick={this.approveRequest}>Approve</Button> 
-            <Button raised colored className="action-button" onClick={this.upvoteRequest}>Vote</Button>
+            <Button disabled={disabled} raised colored className="action-button" onClick={this.rejectRequest}>Reject</Button>
+            <Button disabled={disabled} raised colored className="action-button" onClick={this.approveRequest}>Approve</Button>
+            <Button disabled={disabled} raised colored className="action-button" onClick={this.upvoteRequest}>Vote</Button>
           </div>
         </CardActions>
         <CardMenu className="white">
@@ -45,4 +46,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default ListItem;
