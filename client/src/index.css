@@ -29,3 +29,7 @@ button.action-button {
   margin-right: 10px;
   width: 100px;
 }
+
+#action-new {
+  line-height: 0px;
+}

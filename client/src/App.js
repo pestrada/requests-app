@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { Layout, Header, Navigation, Drawer, Content } from 'react-mdl';
+import { Layout, Header, Navigation, Drawer, Content, Button } from 'react-mdl';
 import ListItem from './ListItem.js';
 
 const url = 'http://localhost:3000/requests';
@@ -96,9 +96,9 @@ class App extends Component {
 
         <div>
           <Layout fixedDrawer>
-              <Header title="Requests" >
+              <Header title={'Requests - ' + this.state.requestType.toUpperCase()}>
                 <Navigation>
-                  <a href="">{this.state.requestType.toUpperCase()}</a>
+                  <Button raised accent ripple id="action-new" onClick={this.rejectRequest}>New Request</Button>
                 </Navigation>
               </Header>
               <Drawer title="">
