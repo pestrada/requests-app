@@ -12,11 +12,15 @@ class App extends Component {
   }
 
   approveRequest = () => {
-    this.props.approveRequest(this.props.id);
+    this.props.approveRequest({id: this.props.id, type: 'approved', votes: this.props.votes});
   }
 
   rejectRequest = () => {
-    this.props.rejectRequest(this.props.id);
+    this.props.rejectRequest({id: this.props.id, type: 'rejected', votes: this.props.votes});
+  }
+
+  upvoteRequest = () => {
+    this.props.upvoteRequest({id: this.props.id, type: this.props.requestType, votes: this.props.votes + 1});
   }
 
   render() {
@@ -30,11 +34,11 @@ class App extends Component {
           <div>
             <Button raised colored className="action-button" onClick={this.rejectRequest}>Reject</Button>
             <Button raised colored className="action-button" onClick={this.approveRequest}>Approve</Button> 
-            <Button raised colored className="action-button">Vote</Button>
+            <Button raised colored className="action-button" onClick={this.upvoteRequest}>Vote</Button>
           </div>
         </CardActions>
         <CardMenu className="white">
-            <Badge text="4">votes</Badge>
+            <Badge text={this.props.votes}>votes</Badge>
         </CardMenu>
       </Card>
     );

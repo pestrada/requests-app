@@ -38,23 +38,32 @@ class App extends Component {
   }
 
   patchRequest = (request, callback) => {
-    const body = JSON.stringify({type: request.type});
+    const body = JSON.stringify(request);
     const headers = new Headers({'Content-Type': 'application/json',});
     fetch(`${url}/${request.id}`, { method: 'PATCH', headers: headers, body: body})
       .then((response) => {
         return response.json();
       })
       .then((json) => {
-        this.showPending();
+        callback ? callback() : this.showPending();
       });
   }
 
-  approveRequest = (id) => {
-    this.patchRequest({ id: id, type: 'approved'});
+  approveRequest = (request) => {
+    this.patchRequest(request);
   }
 
-  rejectRequest = (id) => {
-    this.patchRequest({ id: id, type: 'rejected'});
+  rejectRequest = (request) => {
+    this.patchRequest(request);
+  }
+
+  upvoteRequest = (request) => {
+    this.patchRequest(request, this.refreshRequests);
+  }
+
+  refreshRequests = () => {
+    const method = 'show' + this.state.requestType.charAt(0).toUpperCase() + this.state.requestType.slice(1).toLowerCase();
+    this[method]();
   }
 
   componentDidMount() {
@@ -67,7 +76,15 @@ class App extends Component {
 
   render() {
     const listItems = this.state.requests.map((item) => {
-      return (<ListItem description={item.description} requestType={item.type} key={item.id} id={item.id} approveRequest={this.approveRequest} rejectRequest={this.rejectRequest} />);
+      return (<ListItem 
+        description={item.description} 
+        requestType={item.type} 
+        key={item.id} 
+        id={item.id} 
+        votes={item.votes} 
+        approveRequest={this.approveRequest} 
+        rejectRequest={this.rejectRequest}
+        upvoteRequest={this.upvoteRequest} />);
     });
 
     return (

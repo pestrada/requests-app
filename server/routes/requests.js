@@ -5,17 +5,20 @@ var requests = [
   {
     id: 1,
     description: 'request pending',
-    type: 'pending'
+    type: 'pending',
+    votes: 1
   },
   {
     id: 2,
     description: 'request Approved',
-    type: 'approved'
+    type: 'approved',
+    votes: 1
   },
   {
     id: 3,
     description: 'request Rejected',
-    type: 'rejected'
+    type: 'rejected',
+    votes: 1
   }
 ];
 
@@ -35,6 +38,7 @@ router.patch('/:id', function(req, res, next) {
   for (let i = 0; i < len; i++) {
     if (requests[i].id == req.params.id) {
       requests[i].type = req.body.type;
+      requests[i].votes = req.body.votes;
       break;
     }
   }
