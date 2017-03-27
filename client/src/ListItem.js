@@ -15,6 +15,10 @@ class App extends Component {
     this.props.approveRequest(this.props.id);
   }
 
+  rejectRequest = () => {
+    this.props.rejectRequest(this.props.id);
+  }
+
   render() {
     return (
       <Card shadow={0} className="card">
@@ -24,7 +28,7 @@ class App extends Component {
         </CardText>
         <CardActions border>
           <div>
-            <Button raised colored className="action-button">Reject</Button>
+            <Button raised colored className="action-button" onClick={this.rejectRequest}>Reject</Button>
             <Button raised colored className="action-button" onClick={this.approveRequest}>Approve</Button> 
             <Button raised colored className="action-button">Vote</Button>
           </div>

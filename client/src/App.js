@@ -37,16 +37,24 @@ class App extends Component {
       });
   }
 
-  approveRequest = (id) => {
-    const body = JSON.stringify({type: 'approved'});
+  patchRequest = (request, callback) => {
+    const body = JSON.stringify({type: request.type});
     const headers = new Headers({'Content-Type': 'application/json',});
-    fetch(`${url}/${id}`, { method: 'PATCH', headers: headers, body: body})
+    fetch(`${url}/${request.id}`, { method: 'PATCH', headers: headers, body: body})
       .then((response) => {
         return response.json();
       })
       .then((json) => {
         this.showPending();
       });
+  }
+
+  approveRequest = (id) => {
+    this.patchRequest({ id: id, type: 'approved'});
+  }
+
+  rejectRequest = (id) => {
+    this.patchRequest({ id: id, type: 'rejected'});
   }
 
   componentDidMount() {
@@ -59,7 +67,7 @@ class App extends Component {
 
   render() {
     const listItems = this.state.requests.map((item) => {
-      return (<ListItem description={item.description} requestType={item.type} key={item.id} id={item.id} approveRequest={this.approveRequest} />);
+      return (<ListItem description={item.description} requestType={item.type} key={item.id} id={item.id} approveRequest={this.approveRequest} rejectRequest={this.rejectRequest} />);
     });
 
     return (
