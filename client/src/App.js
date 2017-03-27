@@ -81,7 +81,7 @@ class App extends Component {
           <Layout fixedDrawer>
               <Header title="Requests" >
                 <Navigation>
-                  <a href="" onClick={this.showPending}>Pending</a>
+                  <a href="">{this.state.requestType.toUpperCase()}</a>
                 </Navigation>
               </Header>
               <Drawer title="">
