@@ -112,7 +112,7 @@ class App extends Component {
       return (<ListItem 
         description={item.description} 
         requestType={item.type} 
-        key={item.id} 
+        key={item._id} 
         id={item.id} 
         votes={item.votes} 
         approveRequest={this.approveRequest} 
