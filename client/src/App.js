@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import { Layout, Header, Navigation, Drawer, Content, Button } from 'react-mdl';
 import ListItem from './ListItem.js';
+import RequestDialog from './RequestDialog.js';
 
 const url = 'http://localhost:3000/requests';
 
@@ -11,7 +12,8 @@ class App extends Component {
     super(props);
     this.state = {
       requestType: "pending",
-      requests: []
+      requests: [],
+      openDialog: false
     };
   }
 
@@ -48,6 +50,18 @@ class App extends Component {
         callback ? callback() : this.showPending();
       });
   }
+  
+  postRequest = (request, callback) => {
+    const body = JSON.stringify(request);
+    const headers = new Headers({'Content-Type': 'application/json',});
+    fetch(`${url}`, { method: 'POST', headers: headers, body: body})
+      .then((response) => {
+        return response.json();
+      })
+      .then((json) => {
+        callback ? callback() : this.showPending();
+      });
+  }
 
   approveRequest = (request) => {
     this.patchRequest(request);
@@ -64,6 +78,25 @@ class App extends Component {
   refreshRequests = () => {
     const method = 'show' + this.state.requestType.charAt(0).toUpperCase() + this.state.requestType.slice(1).toLowerCase();
     this[method]();
+  }
+
+  saveRequest = (description) => {
+    this.postRequest({description: description}, () => {
+      this.handleCloseDialog();
+      this.showPending();
+    });
+  }
+
+  handleOpenDialog = () => {
+    this.setState({
+      openDialog: true
+    });
+  }
+
+  handleCloseDialog = () => {
+    this.setState({
+      openDialog: false
+    });
   }
 
   componentDidMount() {
@@ -98,7 +131,8 @@ class App extends Component {
           <Layout fixedDrawer>
               <Header title={'Requests - ' + this.state.requestType.toUpperCase()}>
                 <Navigation>
-                  <Button raised accent ripple id="action-new" onClick={this.rejectRequest}>New Request</Button>
+                  <Button raised accent ripple id="action-new" onClick={this.handleOpenDialog}>New Request</Button>
+                  <RequestDialog openDialog={this.state.openDialog} handleCloseDialog={this.handleCloseDialog} saveRequest={this.saveRequest}></RequestDialog>
                 </Navigation>
               </Header>
               <Drawer title="">

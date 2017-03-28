@@ -45,4 +45,16 @@ router.patch('/:id', function(req, res, next) {
   res.json({ data: 200 });
 });
 
+router.post('/', function(req, res, next) {
+  const last = requests[requests.length - 1];
+  const newRequest = {
+    id: last.id + 1,
+    description: req.body.description,
+    type: 'pending',
+    votes: 0
+  };
+  requests.push(newRequest);
+  res.json({data: 200});
+});
+
 module.exports = router;
