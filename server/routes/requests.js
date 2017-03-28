@@ -19,6 +19,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/:requestType', function(req, res, next) {
+  console.log(req.params);
   dbSchema.Request.find({type: req.params.requestType}, function (err, requests) {
     if (err) return console.error(err);
     res.json({ data: requests });
@@ -28,7 +29,7 @@ router.get('/:requestType', function(req, res, next) {
 router.patch('/:id', function(req, res, next) {
   const query = { _id: req.params.id };
   const values = {
-    description: req.body.type,
+    type: req.body.type,
     votes: req.body.votes
   };
   const options = { upsert: true};
