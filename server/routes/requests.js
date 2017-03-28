@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
+var dbSchema = require('../schema/DbSchema.js');
 
 mongoose.connect('mongodb://localhost/test');
 
@@ -55,14 +56,15 @@ router.patch('/:id', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  const last = requests[requests.length - 1];
-  const newRequest = {
-    id: last.id + 1,
+  const newRequest = new dbSchema.Request({
     description: req.body.description,
     type: 'pending',
     votes: 0
-  };
-  requests.push(newRequest);
+  });
+  
+  newRequest.save(function (err, newRequest) {
+    if (err) return console.error(err);
+  });
   res.json({data: 200});
 });
 
