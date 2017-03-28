@@ -14,7 +14,6 @@ db.once('open', function () {
 router.get('/', function(req, res, next) {
   dbSchema.Request.find(function (err, requests) {
     if (err) return console.error(err);
-    console.log(requests);
     res.json({ data: requests });
   });
 });
@@ -22,7 +21,6 @@ router.get('/', function(req, res, next) {
 router.get('/:requestType', function(req, res, next) {
   dbSchema.Request.find({type: req.params.requestType}, function (err, requests) {
     if (err) return console.error(err);
-    console.log(requests);
     res.json({ data: requests });
   });
 });
