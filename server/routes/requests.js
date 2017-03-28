@@ -26,15 +26,16 @@ router.get('/:requestType', function(req, res, next) {
 });
 
 router.patch('/:id', function(req, res, next) {
-  const len = requests.length;
-  for (let i = 0; i < len; i++) {
-    if (requests[i].id == req.params.id) {
-      requests[i].type = req.body.type;
-      requests[i].votes = req.body.votes;
-      break;
-    }
-  }
-  res.json({ data: 200 });
+  const query = { _id: req.params.id };
+  const values = {
+    description: req.body.type,
+    votes: req.body.votes
+  };
+  const options = { upsert: true};
+  dbSchema.Request.update(query, values, options, function (err, raw) {
+    if (err) return console.error(err);
+    res.json({ data: 200 });
+  });
 });
 
 router.post('/', function(req, res, next) {

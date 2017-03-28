@@ -113,7 +113,7 @@ class App extends Component {
         description={item.description} 
         requestType={item.type} 
         key={item._id} 
-        id={item.id} 
+        id={item._id} 
         votes={item.votes} 
         approveRequest={this.approveRequest} 
         rejectRequest={this.rejectRequest}
