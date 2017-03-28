@@ -7,3 +7,5 @@ The goal was to experiment integrating:
 - [React Material Design](https://react-mdl.github.io/react-mdl/)
 - [Babel](http://babeljs.io/)
 - [Webpack](https://webpack.github.io/)
+
+![Requests-App](/screenshot.png)
