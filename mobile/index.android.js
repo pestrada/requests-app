@@ -9,13 +9,13 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View,
   TouchableHighlight
 } from 'react-native';
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right,
   Body, Icon, Grid, Col, Row, Fab
 } from 'native-base';
 import ListItem from './components/ListItem.js';
+import RequestDialog from './components/RequestDialog.js';
 
 const url = 'http://10.0.2.2:3000/requests';
 
@@ -184,6 +184,7 @@ export default class mobile extends Component {
                 </Button>
             </FooterTab>
         </Footer>
+        <RequestDialog openDialog={this.state.openDialog} handleCloseDialog={this.handleCloseDialog} saveRequest={this.saveRequest}></RequestDialog>
       </Container>
     );
   }
