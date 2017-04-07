@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body } from 'native-base';
+import { Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Image, Right, Grid, Col } from 'native-base';
 
 class ListItem extends Component {
 
@@ -31,20 +31,37 @@ class ListItem extends Component {
                 <Left>
                     <Body>
                         <Text>{this.props.description}</Text>
-                        <Text note>{this.props.requestType}</Text>
                     </Body>
                 </Left>
             </CardItem>
+            
             <CardItem>
-                <Body>
-                    <Text>
-                        hola
-                    </Text>
+                <Grid>
+                    <Col>
+                        <Button danger block style={{width: 100}}>
+                            <Text>Reject</Text>
+                        </Button>
+                    </Col>
+                    <Col>
+                        <Button success block style={{width: 100}}>
+                            <Text>Approve</Text>
+                        </Button>
+                    </Col>
+                    <Col>
+                        <Button primary block style={{width: 100}}>
+                        <Text>Vote</Text>
+                    </Button>
+                    </Col>
+                </Grid>
+            </CardItem>
+            <CardItem>
+                <Text note>{this.props.requestType}</Text>
+                <Right>
                     <Button transparent textStyle={{color: '#87838B'}}>
                         <Icon name="md-star" />
                         <Text>{this.props.votes} votes</Text>
                     </Button>
-                </Body>
+                </Right>
             </CardItem>
         </Card>
     );
