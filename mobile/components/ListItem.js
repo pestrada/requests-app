@@ -38,17 +38,17 @@ class ListItem extends Component {
             <CardItem>
                 <Grid>
                     <Col>
-                        <Button danger block style={{width: 100}}>
+                        <Button danger block style={{width: 100}} onPress={this.rejectRequest}>
                             <Text>Reject</Text>
                         </Button>
                     </Col>
                     <Col>
-                        <Button success block style={{width: 100}}>
+                        <Button success block style={{width: 100}} onPress={this.approveRequest}>
                             <Text>Approve</Text>
                         </Button>
                     </Col>
                     <Col>
-                        <Button primary block style={{width: 100}}>
+                        <Button primary block style={{width: 100}} onPress={this.upvoteRequest}>
                         <Text>Vote</Text>
                     </Button>
                     </Col>
