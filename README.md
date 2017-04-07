@@ -11,3 +11,5 @@ The goal was to experiment integrating:
 - [Webpack](https://webpack.github.io/)
 
 ![Requests-App](/screenshot.png)
+
+![Requests-App](/screenshot_two.png)
