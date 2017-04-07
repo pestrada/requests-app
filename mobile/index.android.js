@@ -12,7 +12,9 @@ import {
   View,
   TouchableHighlight
 } from 'react-native';
-import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Grid, Col, Row } from 'native-base';
+import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right,
+  Body, Icon, Grid, Col, Row, Fab
+} from 'native-base';
 import ListItem from './components/ListItem.js';
 
 const url = 'http://10.0.2.2:3000/requests';
@@ -166,6 +168,15 @@ export default class mobile extends Component {
         <Content>
             {listItems}
         </Content>
+        <Fab
+          active={true}
+          direction="right"
+          containerStyle={{ marginLeft: 10 }}
+          style={{ backgroundColor: '#DD5144' }}
+          position="bottomRight"
+          onPress={this.handleOpenDialog}>
+          <Icon name="md-add" />
+        </Fab>
         <Footer>
             <FooterTab>
                 <Button full>
