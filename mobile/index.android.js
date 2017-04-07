@@ -9,7 +9,8 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  View
+  View,
+  TouchableHighlight
 } from 'react-native';
 import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Grid, Col, Row } from 'native-base';
 import ListItem from './components/ListItem.js';
@@ -147,17 +148,17 @@ export default class mobile extends Component {
         </Header>
         <Row style={{height: 50}}>
           <Col>
-              <Button danger block transparent>
-                  <Text>Pending</Text>
-              </Button>
+            <Button danger block transparent onPress={this.showPending}>
+                <Text>Pending</Text>
+            </Button>
           </Col>
           <Col>
-              <Button success block transparent>
+              <Button success block transparent onPress={this.showApproved}>
                   <Text>Approved</Text>
               </Button>
           </Col>
           <Col>
-              <Button primary block transparent>
+              <Button primary block transparent onPress={this.showRejected}>
               <Text>Rejected</Text>
           </Button>
           </Col>

@@ -50,7 +50,7 @@ class App extends Component {
         callback ? callback() : this.showPending();
       });
   }
-  
+
   postRequest = (request, callback) => {
     const body = JSON.stringify(request);
     const headers = new Headers({'Content-Type': 'application/json',});
@@ -109,13 +109,13 @@ class App extends Component {
 
   render() {
     const listItems = this.state.requests.map((item) => {
-      return (<ListItem 
-        description={item.description} 
-        requestType={item.type} 
-        key={item._id} 
-        id={item._id} 
-        votes={item.votes} 
-        approveRequest={this.approveRequest} 
+      return (<ListItem
+        description={item.description}
+        requestType={item.type}
+        key={item._id}
+        id={item._id}
+        votes={item.votes}
+        approveRequest={this.approveRequest}
         rejectRequest={this.rejectRequest}
         upvoteRequest={this.upvoteRequest} />);
     });
