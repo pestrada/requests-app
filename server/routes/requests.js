@@ -3,7 +3,7 @@ var router = express.Router();
 var mongoose = require('mongoose');
 var dbSchema = require('../schema/DbSchema.js');
 
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect('mongodb://localhost:27017/test');
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error'));
@@ -44,7 +44,7 @@ router.post('/', function(req, res, next) {
     type: 'pending',
     votes: 0
   });
-  
+
   newRequest.save(function (err, newRequest) {
     if (err) return console.error(err);
   });
