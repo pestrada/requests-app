@@ -11,7 +11,7 @@ import {
   Text,
   View
 } from 'react-native';
-import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon } from 'native-base';
+import { Container, Header, Title, Content, Footer, FooterTab, Button, Left, Right, Body, Icon, Grid, Col, Row } from 'native-base';
 import ListItem from './components/ListItem.js';
 
 const url = 'http://10.0.2.2:3000/requests';
@@ -141,10 +141,27 @@ export default class mobile extends Component {
                 </Button>
             </Left>
             <Body>
-                <Title>Requests App</Title>
+                <Title>Requests</Title>
             </Body>
             <Right />
         </Header>
+        <Row style={{height: 50}}>
+          <Col>
+              <Button danger block transparent>
+                  <Text>Pending</Text>
+              </Button>
+          </Col>
+          <Col>
+              <Button success block transparent>
+                  <Text>Approved</Text>
+              </Button>
+          </Col>
+          <Col>
+              <Button primary block transparent>
+              <Text>Rejected</Text>
+          </Button>
+          </Col>
+        </Row>
         <Content>
             {listItems}
         </Content>
