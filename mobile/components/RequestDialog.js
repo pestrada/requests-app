@@ -1,10 +1,19 @@
 import React from 'react';
 import {
   Modal,
+  StyleSheet,
   Text,
   TouchableHighlight,
   View
 } from 'react-native';
+import {
+  Button,
+  Container,
+  Content,
+  Form,
+  Input,
+  Item
+} from 'native-base';
 
 class RequestDialog extends React.Component {
   constructor(props) {
@@ -14,8 +23,8 @@ class RequestDialog extends React.Component {
     };
   }
 
-  onChange = (e) => {
-    this.setState({description: e.target.value});
+  onChangeText = (text) => {
+    this.setState({description: text});
   }
 
   handleClick = () => {
@@ -30,23 +39,29 @@ class RequestDialog extends React.Component {
 
   render() {
     return (
-      <View style={{marginTop: 22}}>
+      <View>
         <Modal
           animationType={"slide"}
           transparent={false}
           visible={this.props.openDialog}
           onRequestClose={this.handleCloseDialog}>
 
-          <View style={{marginTop: 22}}>
-            <View>
-            <Text>Hello World!</Text>
+          <Container>
+              <Content>
+                <Form>
+                  <Item>
+                    <Input value={this.state.description} onChangeText={this.onChangeText} placeholder="description..." />
+                  </Item>
+                  <Text style={styles.text}>Chances of approval are higher if requests are voted up by your peers!</Text>
 
-            <TouchableHighlight onPress={this.handleCloseDialog}>
-                <Text>Hide Modal</Text>
-            </TouchableHighlight>
-
-            </View>
-          </View>
+                  <TouchableHighlight onPress={this.handleClick} style={styles.btnSave}>
+                    <Button primary block>
+                      <Text style={styles.white}>Save</Text>
+                    </Button>
+                  </TouchableHighlight>
+                </Form>
+              </Content>
+            </Container>
         </Modal>
 
       </View>
@@ -54,5 +69,21 @@ class RequestDialog extends React.Component {
   }
 
 }
+
+const styles = StyleSheet.create({
+  btnSave: {
+    marginLeft: 15,
+    marginRight: 15
+  },
+  text: {
+    marginBottom: 20,
+    marginTop: 20,
+    paddingLeft: 15,
+    paddingRight: 15
+  },
+  white: {
+    color: 'white'
+  }
+});
 
 export default RequestDialog;

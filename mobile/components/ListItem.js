@@ -49,8 +49,8 @@ class ListItem extends Component {
                     </Col>
                     <Col>
                         <Button primary block style={{width: 100}} onPress={this.upvoteRequest}>
-                        <Text>Vote</Text>
-                    </Button>
+                            <Text>Vote</Text>
+                        </Button>
                     </Col>
                 </Grid>
             </CardItem>
