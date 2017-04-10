@@ -49,13 +49,14 @@ class RequestDialog extends React.Component {
           <Container>
               <Content>
                 <Form>
+                  <Text style={styles.text}>What would you like to request?</Text>
                   <Item>
                     <Input value={this.state.description} onChangeText={this.onChangeText} placeholder="description..." />
                   </Item>
                   <Text style={styles.text}>Chances of approval are higher if requests are voted up by your peers!</Text>
 
-                  <TouchableHighlight onPress={this.handleClick} style={styles.btnSave}>
-                    <Button primary block>
+                  <TouchableHighlight style={styles.btnSave}>
+                    <Button primary block onPress={this.handleClick}>
                       <Text style={styles.white}>Save</Text>
                     </Button>
                   </TouchableHighlight>
@@ -65,7 +66,7 @@ class RequestDialog extends React.Component {
         </Modal>
 
       </View>
-      );
+    );
   }
 
 }
